@@ -1,0 +1,75 @@
+.semesterCard{
+    border: 0.5px solid rgba(38, 0, 255, 0.151);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    padding: 10px;
+    margin: 10px;
+    text-align: start;
+    display: inline-block;
+}
+
+.course{
+    display: flex;
+}
+
+.course>label{
+    flex-grow: 1;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 1rem;
+  }
+  
+  .navbar-left .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .navbar-center .nav-links {
+    list-style-type: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .navbar-center .nav-links li {
+    margin-right: 1rem;
+  }
+  .nav-links>li>a:hover{
+    color: #33b1fa;
+  }
+
+  .logo:hover{
+    color: #33b1fa;
+  }
+  
+  .navbar-center .nav-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .navbar-right {
+    display: flex;
+    align-items: center;
+  }
+  
+.profileLogo {
+    width: 45px;
+    height: 40px;
+    border-radius: 10%;
+    margin-left: 1rem;
+}
+
+
+
+
+ 
+
+  
