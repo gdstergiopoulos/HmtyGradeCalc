@@ -5,20 +5,93 @@ import React from 'react';
 
 function App() {
 
-  let [data, setData] = React.useState(null);
+  let [data1, setData1] = React.useState(null);
   React.useEffect(()=>{
-    fetch("/api")
+    fetch("/api/courses/semester/1")
     .then(res => res.json())
-    .then(data => setData(data.message))
+    .then(data1 => setData1(data1.dbmsg));
   },[]);
 
-  console.log(data);
+  let [data2, setData2] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/2")
+    .then(res => res.json())
+    .then(data2 => setData2(data2.dbmsg));
+  },[]);
+
+  let [data3, setData3] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/3")
+    .then(res => res.json())
+    .then(data3 => setData3(data3.dbmsg));
+  },[]);
+
+  let [data4, setData4] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/4")
+    .then(res => res.json())
+    .then(data4 => setData4(data4.dbmsg));
+  },[]);
+ 
+  let [data5, setData5] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/5")
+    .then(res => res.json())
+    .then(data5 => setData5(data5.dbmsg));
+  },[]);
+
+  let [data6, setData6] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/6")
+    .then(res => res.json())
+    .then(data6 => setData6(data6.dbmsg));
+  },[]);
+
+  let [data7, setData7] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/7")
+    .then(res => res.json())
+    .then(data7 => setData7(data7.dbmsg));
+  },[]);
+
+  let [data8, setData8] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/8")
+    .then(res => res.json())
+    .then(data8 => setData8(data8.dbmsg));
+  },[]);
+
+
+  let [data9, setData9] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/9")
+    .then(res => res.json())
+    .then(data9 => setData9(data9.dbmsg));
+  },[]);
+
+  let [dataX, setDataX] = React.useState(null);
+  React.useEffect(()=>{
+    fetch("/api/courses/semester/10")
+    .then(res => res.json())
+    .then(dataX => setDataX(dataX.dbmsg));
+  },[]);
+
+
 
 
   return (
     <div className="App">
       <Header/>
-      {data? <Semester courses={data} semesterid={1}/> : <p>Loading...</p>}
+      {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>}
+      {data2? <Semester courses={data2} semesterid={2}/> : <p>Loading...</p>}
+      {data3? <Semester courses={data3} semesterid={3}/> : <p>Loading...</p>}
+      {data4? <Semester courses={data4} semesterid={4}/> : <p>Loading...</p>}
+      {data5? <Semester courses={data5} semesterid={5}/> : <p>Loading...</p>}
+      {data6? <Semester courses={data6} semesterid={6}/> : <p>Loading...</p>}
+      {data7? <Semester courses={data7} semesterid={7}/> : <p>Loading...</p>}
+      {data8? <Semester courses={data8} semesterid={8}/> : <p>Loading...</p>}
+      {data9? <Semester courses={data9} semesterid={9}/> : <p>Loading...</p>}
+      {dataX? <Semester courses={dataX} semesterid={10}/> : <p>Loading...</p>}
       {/* <p>{!data?"Loading...":data}</p> */}
       <Footer/>
     </div>
