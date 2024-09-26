@@ -12,11 +12,14 @@ function App() {
     .then(data => setData(data.message))
   },[]);
 
+  console.log(data);
+
+
   return (
     <div className="App">
       <Header/>
-      <Semester/>
-      <p>{!data?"Loading...":data}</p>
+      {data? <Semester courses={data} semesterid={1}/> : <p>Loading...</p>}
+      {/* <p>{!data?"Loading...":data}</p> */}
       <Footer/>
     </div>
   );
