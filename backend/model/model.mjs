@@ -24,3 +24,16 @@ export let getCourses= (semesterID) => {
         throw err;
     }
 }
+
+export let getSelectedCourses = (studentID,semesterID) => {
+    let stmt = sql.prepare('SELECT C.courseName,C.courseCode,S.Semester,C.syntelestis\
+        FROM Course as C,Selection as S\
+        WHERE C.courseCode=S.courseCode AND S.username=? AND S.Semester=?');
+    try{
+        let courses = stmt.all(studentID,semesterID);
+        return courses;
+    }
+    catch(err){
+        throw err;
+    }
+}

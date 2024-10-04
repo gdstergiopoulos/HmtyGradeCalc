@@ -97,7 +97,7 @@ function App() {
     const newWeights = Array.from(weights).map(weight => parseFloat(weight.innerText) || 0);
     setWeights(newWeights);
   }
-
+ 
   React.useEffect(() => {
     const inputs = document.querySelectorAll('.input-grade');
     inputs.forEach(input => {
@@ -108,9 +108,9 @@ function App() {
       inputs.forEach(input => {
         input.removeEventListener('input', getInputValues);
       });
-      
+      // console.log(grades,weights);
     };
-  }, [grades,weights]);
+  },[grades,weights]);
 
   React.useEffect(() => {
     if (grades.length > 0 && weights.length > 0) {
@@ -126,8 +126,47 @@ function App() {
       }
     }
   }, [grades, weights]);
-
   
+  //another approach without infinite but not working
+
+  // let [grades, setGrades] = React.useState([]);
+  // let [weights, setWeights] = React.useState([]);
+  // let [avgGrade, setAvgGrade] = React.useState(null);
+
+  // // Update grades based on user input
+  // const handleGradeChange = (index, value) => {
+  //   console.log("grade")
+  //   const updatedGrades = [...grades];
+  //   console.log(updatedGrades);
+  //   updatedGrades[index] = parseFloat(value) || 0;  // Update the grade at the specific index
+  //   setGrades(updatedGrades);
+  // };
+
+  // // Set the weights of the courses
+  // React.useEffect(() => {
+  //   const weightElements = document.querySelectorAll('.weight');
+  //   const newWeights = Array.from(weightElements).map(weight => parseFloat(weight.innerText) || 0);
+  //   setWeights(newWeights);
+  // }, []);
+
+  // // Calculate average grade when grades or weights change
+  // React.useEffect(() => {
+  //   if (grades.length > 0 && weights.length > 0) {
+  //     const validGrades = grades.filter(grade => grade >= 5.0 && grade <= 10.0);
+  //     const validWeights = weights.filter((_, index) => grades[index] >= 5.0 && grades[index] <= 10.0);
+
+  //     if (validGrades.length > 0 && validWeights.length > 0) {
+  //       const weightedSum = validGrades.reduce((sum, grade, index) => sum + grade * validWeights[index], 0);
+  //       const totalWeights = validWeights.reduce((sum, weight) => sum + weight, 0);
+  //       const avggrade = totalWeights > 0 ? (weightedSum / totalWeights).toFixed(2) : 0;
+  //       setAvgGrade(avggrade);
+  //     } else {
+  //       setAvgGrade(0);
+  //     }
+  //   }
+  // }, [grades, weights]);
+
+
   return (
     <>
     <Router>
@@ -135,7 +174,8 @@ function App() {
         <Route exact path="/" element={<div className="App">
       <Header/>
       <h3>Average Grade {avgGrade}</h3>
-      {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>}
+      {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>} 
+      {/* handleGradeChange={handleGradeChange} in semester */}
       {data2? <Semester courses={data2} semesterid={2}/> : <p>Loading...</p>}
       {data3? <Semester courses={data3} semesterid={3}/> : <p>Loading...</p>}
       {data4? <Semester courses={data4} semesterid={4}/> : <p>Loading...</p>}

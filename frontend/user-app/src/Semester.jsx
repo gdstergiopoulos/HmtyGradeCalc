@@ -25,6 +25,7 @@ function Semester({courses,semesterid}) {
                         } else {
                             input.style.color = 'red';
                         }
+                        // handleGradeChange(index, e.target.value);
                     }}
                 />
             </div>
