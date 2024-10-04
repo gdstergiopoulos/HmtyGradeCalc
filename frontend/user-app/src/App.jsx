@@ -2,6 +2,12 @@ import Header from './Header';
 import Semester from './Semester';
 import Footer from './Footer';
 import React from 'react';
+import Login from './Login';
+import About from './About';
+import Contact from './Contact';
+import Stats from './Statistics';
+import Register from './Register';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 
 function App() {
   
@@ -123,7 +129,10 @@ function App() {
 
   
   return (
-    <div className="App">
+    <>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<div className="App">
       <Header/>
       <h3>Average Grade {avgGrade}</h3>
       {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>}
@@ -138,7 +147,17 @@ function App() {
       {dataX? <Semester courses={dataX} semesterid={10}/> : <p>Loading...</p>}
       {/* <p>{!data?"Loading...":data}</p> */}
       <Footer/>
-    </div>
+    </div>}/>
+        <Route path="/myprof" element={<Login/>}></Route>
+        <Route path="/about" element={<About/>}></Route>
+        <Route path="/contact" element={<Contact/>}></Route>
+        <Route path="/stats" element={<Stats/>}></Route>
+        <Route path="*" element={<h1>404 Not Found</h1>}></Route>
+        <Route path="/register" element={<Register/>}></Route>
+    </Routes>
+    </Router>
+    
+    </>
   );
 }
 
