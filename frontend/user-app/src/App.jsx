@@ -4,7 +4,7 @@ import Footer from './Footer';
 import React from 'react';
 
 function App() {
-
+  
   let [data1, setData1] = React.useState(null);
   React.useEffect(()=>{
     fetch("/api/courses/semester/1")
@@ -76,12 +76,56 @@ function App() {
     .then(dataX => setDataX(dataX.dbmsg));
   },[]);
 
+  let [grades, setGrades] = React.useState([]);
+  let [avgGrade, setAvggrade] = React.useState(null);
 
+  const getInputValues = () => {
+    const inputs = document.querySelectorAll('.input-grade');
+    const newGrades = Array.from(inputs).map(input => parseFloat(input.value) || 0);
+    setGrades(newGrades);
+  };
 
+  let [weights, setWeights] = React.useState([]);
+  const getWeightValues = () => {
+    const weights = document.querySelectorAll('.weight');
+    const newWeights = Array.from(weights).map(weight => parseFloat(weight.innerText) || 0);
+    setWeights(newWeights);
+  }
 
+  React.useEffect(() => {
+    const inputs = document.querySelectorAll('.input-grade');
+    inputs.forEach(input => {
+      input.addEventListener('input', getInputValues);
+    });
+    getWeightValues();
+    return () => {
+      inputs.forEach(input => {
+        input.removeEventListener('input', getInputValues);
+      });
+      
+    };
+  }, [grades,weights]);
+
+  React.useEffect(() => {
+    if (grades.length > 0 && weights.length > 0) {
+      const validGrades = grades.filter(grade => grade >= 5.0 && grade <= 10.0);
+      const validWeights = weights.filter((_, index) => grades[index] >= 5.0 && grades[index] <= 10.0);
+      if (validGrades.length > 0 && validWeights.length > 0) {
+        const weightedSum = validGrades.reduce((sum, grade, index) => sum + grade * validWeights[index], 0);
+        const totalWeights = validWeights.reduce((sum, weight) => sum + weight, 0);
+        const avggrade = totalWeights > 0 ? (weightedSum / totalWeights).toFixed(2) : 0;
+        setAvggrade(avggrade);
+      } else {
+        setAvggrade(0);
+      }
+    }
+  }, [grades, weights]);
+
+  
   return (
     <div className="App">
       <Header/>
+      <h3>Average Grade {avgGrade}</h3>
       {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>}
       {data2? <Semester courses={data2} semesterid={2}/> : <p>Loading...</p>}
       {data3? <Semester courses={data3} semesterid={3}/> : <p>Loading...</p>}
