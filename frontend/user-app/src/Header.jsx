@@ -5,7 +5,7 @@ function Header(){
         <header>
         <nav className="navbar">
             <div className="navbar-left">
-                <a href="/" className="logo">HmtyGrade</a>
+                <a href="/" className="logo">HMTYgrade</a>
             </div>
             <div className="navbar-center">
                 <ul className="nav-links">

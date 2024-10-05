@@ -15,22 +15,25 @@ function Login(){
                 username: event.target[0].value,
                 password: event.target[1].value
             })
-    })
-        .then(response => response.json())
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
             console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
-        });
-
-       
+        }); 
     }
 
     return(
         <>
         <Header/>
-        <div className="login" class="loginform">
+        <div className="login">
             <h1>Login</h1>
             <form onSumbit={handleSubmit}>
                 <input class="form-control" type="text" placeholder="Username"/>

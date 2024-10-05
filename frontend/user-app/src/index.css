@@ -67,7 +67,7 @@
     margin-left: 1rem;
 }
 
-.loginform{
+.login{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -75,7 +75,7 @@
     margin-top: 10%;
 }
 
-.loginform>form>button{
+.login>form>button{
   display: block;
   margin:auto;
 }

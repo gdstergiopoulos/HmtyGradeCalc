@@ -33,7 +33,7 @@ res.json({ dbmsg });
 
 app.post("/api/login/submit", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body);
+  console.log("here",username, password);
 }
 );
 
