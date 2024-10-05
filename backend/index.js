@@ -31,6 +31,11 @@ else{
 res.json({ dbmsg });
 });
 
+app.post("/api/login/submit", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body);
+}
+);
 
 const port = process.env.PORT || 3000; 
 
