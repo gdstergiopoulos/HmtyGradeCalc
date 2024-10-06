@@ -1,5 +1,7 @@
 import profilelogo from './assets/profile.svg';
-function Header(){
+function Header({loggedIn}){
+
+    
     return(
         <>
         <header>
@@ -21,7 +23,10 @@ function Header(){
                 </ul>
             </div>
             <div className="navbar-right">
-                <a href="/myprof"><img className="profileLogo" src={profilelogo} alt="profilepic"/></a>
+                <a href="/myprof">
+                    <img className="profileLogo" src={profilelogo} alt="profilepic"/>
+                    <span>{loggedIn }</span>
+                </a>
             </div>
         </nav>
         </header>

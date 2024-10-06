@@ -5,7 +5,7 @@ function Login(){
 
     function handleSubmit(event){
         event.preventDefault();
-        console.log("Login form submitted");
+        console.log(event.target[0].value);
         fetch('/api/login/submit', {
             method: 'POST',
             headers: {
@@ -35,12 +35,12 @@ function Login(){
         <Header/>
         <div className="login">
             <h1>Login</h1>
-            <form onSumbit={handleSubmit}>
-                <input class="form-control" type="text" placeholder="Username"/>
+            <form onSubmit={handleSubmit}>
+                <input className="form-control" type="text" name="username" placeholder="Username"/>
                 <br></br>
-                <input class="form-control" type="password" placeholder="Password"/>
+                <input className="form-control" type="password" name="password" placeholder="Password"/>
                 <br></br>
-                <button class="btn btn-dark" type="submit">Login</button>
+                <button className="btn btn-dark" type="submit">Login</button>
                 <p>Don't have an account? <a href="/register">Register</a></p>
             </form>
         </div>

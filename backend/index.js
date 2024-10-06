@@ -1,12 +1,48 @@
 import express from "express";
 import * as model from "./model/model.mjs";
+import session from "express-session";
 
 const app = express();
+const router = express.Router();
+
+app.use(router);
 
 
+router.use(session({
+  secret:  process.env.SESSION_SECRET || "PynOjAuHetAuWawtinAytVunar",
+  resave: false,
+  saveUninitialized: false,
+  cookie: { 
+    maxAge: 2 * 60 * 60 * 1000,
+    sameSite:true
+  }
+}));
 
-app.get("/api/courses/semester/:semesterid", async (req, res) => {
+router.use(express.json());
+router.use(express.urlencoded({ extended: true }));
+
+let checkLogin = async (req, res,next) => {
+  const {username, password} = req.body;
+  console.log(username, password);
   let dbmsg;
+  try{
+    dbmsg= await model.checkLogin(username, password);
+    console.log(dbmsg);
+    if(dbmsg.length>0){
+      req.session.username = dbmsg[0].username;
+      console.log(req.session.username);
+      res.json({ dbmsg });
+    }
+  }
+  catch(err){
+    console.log(err);
+  }
+}
+
+let fetchCourses= async (req, res,next) => {
+  let dbmsg;
+  let studentID=req.session.username;
+  // console.log(studentID);
   const semesterid = req.params.semesterid;
   if (semesterid<7 || semesterid>=10){
   try{
@@ -20,7 +56,6 @@ app.get("/api/courses/semester/:semesterid", async (req, res) => {
 }
 else{
   try{
-    let studentID="ster";
     dbmsg= await model.getSelectedCourses(studentID,semesterid);
     // console.log(dbmsg);
   }
@@ -29,13 +64,24 @@ else{
   }
 }
 res.json({ dbmsg });
-});
-
-app.post("/api/login/submit", async (req, res) => {
-  const { username, password } = req.body;
-  console.log("here",username, password);
 }
-);
+
+let checkAuth = async (req, res,next) => {
+  let dbmsg;
+  // console.log("check", req.session.username);
+  if (req.session.username) {
+    dbmsg = req.session.username;
+  } else {
+    dbmsg = "No active session";
+  }
+  res.json({ dbmsg });
+}
+
+
+router.route("/api/login/submit").post(checkLogin);
+router.route("/api/courses/semester/:semesterid").get(fetchCourses);
+router.route("/api/auth/check").get(checkAuth);
+
 
 const port = process.env.PORT || 3000; 
 

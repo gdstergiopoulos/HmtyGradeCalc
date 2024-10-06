@@ -127,6 +127,17 @@ function App() {
     }
   }, [grades, weights]);
   
+  let [isLoggedIn, setIsLoggedIn] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch("/api/auth/check")
+      .then(res => res.json())
+      .then(data => setIsLoggedIn(data.dbmsg === "No active session" ? false : data.dbmsg))
+      .catch(err => console.error("Error checking login status:", err));
+  }, []);
+
+
+  
   //another approach without infinite but not working
 
   // let [grades, setGrades] = React.useState([]);
@@ -172,7 +183,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<div className="App">
-      <Header/>
+      {isLoggedIn? <Header loggedIn={isLoggedIn}/> : <Header loggedIn={"false"}/>}
       <h3>Average Grade {avgGrade}</h3>
       {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>} 
       {/* handleGradeChange={handleGradeChange} in semester */}
