@@ -67,6 +67,13 @@
     margin-left: 1rem;
 }
 
+.logoutlogo{
+    width: 20px;
+    height: 20px;
+    border-radius: 10%;
+    margin-left: 1rem;
+}
+
 .login{
     display: flex;
     flex-direction: column;
@@ -91,4 +98,14 @@
 .registerform>form>button{
   display: block;
   margin:auto;
+}
+
+.navbar-right>a>span{
+    color:azure;
+    text-decoration: none;
+    margin-right: 0px;
+}
+.navbar-right>a{
+    text-decoration: none;
+    color: azure;
 }

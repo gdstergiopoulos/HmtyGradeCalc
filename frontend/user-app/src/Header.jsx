@@ -1,7 +1,20 @@
 import profilelogo from './assets/profile.svg';
+import logoutlogo from './assets/logout.svg';
 function Header({loggedIn}){
 
-    
+    function handleLogout()
+    {
+        fetch("/api/auth/logout")
+        .then(res => res.json())
+        .then(data => {
+            if(data.dbmsg === "Logged out successfully")
+            {
+                window.location.reload();
+            }
+        })
+        .catch(err => console.error("Error logging out:", err));
+    }
+
     return(
         <>
         <header>
@@ -24,8 +37,11 @@ function Header({loggedIn}){
             </div>
             <div className="navbar-right">
                 <a href="/myprof">
+                    <span>{loggedIn}</span>
                     <img className="profileLogo" src={profilelogo} alt="profilepic"/>
-                    <span>{loggedIn }</span>
+                </a>
+                <a href="/" onClick={handleLogout}>
+                    {loggedIn? <img className="logoutLogo" src={logoutlogo} alt="logoutlogo"/>: <span></span>}
                 </a>
             </div>
         </nav>

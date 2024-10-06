@@ -183,7 +183,7 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" element={<div className="App">
-      {isLoggedIn? <Header loggedIn={isLoggedIn}/> : <Header loggedIn={"false"}/>}
+      {isLoggedIn? <Header loggedIn={isLoggedIn}/> : <Header loggedIn={"Sign In"}/>}
       <h3>Average Grade {avgGrade}</h3>
       {data1? <Semester courses={data1} semesterid={1}/> : <p>Loading...</p>} 
       {/* handleGradeChange={handleGradeChange} in semester */}

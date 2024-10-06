@@ -77,11 +77,20 @@ let checkAuth = async (req, res,next) => {
   res.json({ dbmsg });
 }
 
+let logout =  (req, res,next) => {
+  req.session.destroy((err) => {
+    if (err) {
+      console.error("Error destroying session:", err);
+    }
+    res.json({ dbmsg: "Logged out successfully" });
+  });
+}
+
 
 router.route("/api/login/submit").post(checkLogin);
 router.route("/api/courses/semester/:semesterid").get(fetchCourses);
 router.route("/api/auth/check").get(checkAuth);
-
+router.route("/api/auth/logout").get(logout);
 
 const port = process.env.PORT || 3000; 
 

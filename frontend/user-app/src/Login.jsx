@@ -1,7 +1,9 @@
 import Header from "./Header";
 import Footer from "./Footer";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
+    const navigate=useNavigate();
 
     function handleSubmit(event){
         event.preventDefault();
@@ -20,6 +22,7 @@ function Login(){
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
+            navigate('/');
             return response.json();
         })
         .then(data => {
