@@ -37,3 +37,15 @@ export let getSelectedCourses = (studentID,semesterID) => {
         throw err;
     }
 }
+
+export let getSelectionCourses = () => {
+    let stmt = sql.prepare('SELECT courseName, syntelestis FROM Course WHERE semester not in (1,2,3,4,5,6)');
+    try{
+        let courses = stmt.all();
+        console.log(courses)
+        return courses;
+    }
+    catch(err){
+        throw err;
+    }
+}

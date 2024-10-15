@@ -86,11 +86,27 @@ let logout =  (req, res,next) => {
   });
 }
 
+let fetchSelectionCourses= async (req, res,next) => {
+  let dbmsg;
+  
+  // console.log(studentID);
+  try{
+    dbmsg= await model.getSelectionCourses();
+    console.log(dbmsg);
+  }
+  catch(err){
+    console.log(err);
+  }
+  res.json({ dbmsg });
+}
+
+
 
 router.route("/api/login/submit").post(checkLogin);
 router.route("/api/courses/semester/:semesterid").get(fetchCourses);
 router.route("/api/auth/check").get(checkAuth);
 router.route("/api/auth/logout").get(logout);
+router.route("/api/courses/options").get(fetchSelectionCourses);
 
 const port = process.env.PORT || 3000; 
 
