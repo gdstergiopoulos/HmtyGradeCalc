@@ -9,10 +9,11 @@ function Semester({courses,semesterid}) {
     useEffect(() => {
         fetch('/api/courses/options')
             .then(response => response.json())
-            .then(data => setAvailableCourses(data))
+            .then(data => setAvailableCourses(data.dbmsg))
             .catch(error => console.error('Error fetching courses:', error));
     }, []);
 
+    
     if (courses.length > 0) {
         return (
             <>
@@ -53,7 +54,47 @@ function Semester({courses,semesterid}) {
             <h1>Semester {semesterid}</h1>
             <div className="course">
             <select name="selectCourse">
-            {Array.isArray(availableCourses) && availableCourses.map((course, index) => (
+            {availableCourses.map((course, index) => (
+            <option key={index} value={course.courseName}>{course.courseName}</option>
+            ))}
+            </select>
+            <input type="number" className="input-grade" step="0.5" min="0" max="10" />
+            </div>
+            <div className="course">
+            <select name="selectCourse">
+            {availableCourses.map((course, index) => (
+            <option key={index} value={course.courseName}>{course.courseName}</option>
+            ))}
+            </select>
+            <input type="number" className="input-grade" step="0.5" min="0" max="10" />
+            </div>
+            <div className="course">
+            <select name="selectCourse">
+            {availableCourses.map((course, index) => (
+            <option key={index} value={course.courseName}>{course.courseName}</option>
+            ))}
+            </select>
+            <input type="number" className="input-grade" step="0.5" min="0" max="10" />
+            </div>
+            <div className="course">
+            <select name="selectCourse">
+            {availableCourses.map((course, index) => (
+            <option key={index} value={course.courseName}>{course.courseName}</option>
+            ))}
+            </select>
+            <input type="number" className="input-grade" step="0.5" min="0" max="10" />
+            </div>
+            <div className="course">
+            <select name="selectCourse">
+            {availableCourses.map((course, index) => (
+            <option key={index} value={course.courseName}>{course.courseName}</option>
+            ))}
+            </select>
+            <input type="number" className="input-grade" step="0.5" min="0" max="10" />
+            </div>
+            <div className="course">
+            <select name="selectCourse">
+            {availableCourses.map((course, index) => (
             <option key={index} value={course.courseName}>{course.courseName}</option>
             ))}
             </select>
